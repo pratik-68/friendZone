@@ -1,0 +1,9 @@
+<p>
+  Hi, <%= @user.email %>
+</p>
+
+<p>Thank you for Signing up.</p>
+
+Please <a href="<%=
+  "#{Rails.configuration.ui_server_url}/user/verification/#{@user.email_verification_token}"
+%>">Click here</a> to verify your Email.

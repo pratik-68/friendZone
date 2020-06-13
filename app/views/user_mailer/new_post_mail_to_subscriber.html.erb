@@ -1,0 +1,9 @@
+<p>
+  Hi, <%= @user.first_name %>
+</p>
+
+<p> Your friend <%= @post_user.first_name %>, just created a new post
+</p>
+
+Check out the post at this <a href="<%=
+  "#{Rails.configuration.ui_server_url}/post/#{@post.id}"%>">link</a>.

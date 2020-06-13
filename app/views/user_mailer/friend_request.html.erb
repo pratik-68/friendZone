@@ -1,0 +1,11 @@
+<p>
+  Hi, <%= @recipient.first_name %>
+</p>
+
+
+<p> <a href="<%= "#{Rails.configuration.ui_server_url}/user/#{@sender.id}" %>"> 
+<%= @sender.first_name %> </a>&nbsp;sent you a friend request </p>
+
+To accept, Please <a href="<%=
+  "#{Rails.configuration.ui_server_url}/friends/request-verify/#{@friend.verification_token}"
+%>">Click here</a>.
