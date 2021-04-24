@@ -36,19 +36,19 @@ class Post < ApplicationRecord
 
   def self.all_posts(current_user)
     Post.joins('LEFT JOIN users ON users.id = posts.user_id')
-        .joins('LEFT JOIN friends f1 ON f1.user1_id = users.id')
-        .joins('LEFT JOIN friends f2 ON f2.user2_id = users.id')
-        .left_joins(:post_users)
-        .where(
-          '(posts.user_id = ?) OR (post_users.user_id =?)
-            OR (f1.status = ? AND f1.user2_id = ? AND posts.visible_to IN (?))
-            OR (f2.status = ? AND f2.user1_id = ? AND posts.visible_to IN (?))',
-          current_user.id, current_user.id,
-          Friend.statuses[:accepted], current_user.id,
-          [Post.visible_tos[:public], Post.visible_tos[:friends]],
-          Friend.statuses[:accepted], current_user.id,
-          [Post.visible_tos[:public], Post.visible_tos[:friends]]
-        )
-        .distinct
+      .joins('LEFT JOIN friends f1 ON f1.user1_id = users.id')
+      .joins('LEFT JOIN friends f2 ON f2.user2_id = users.id')
+      .left_joins(:post_users)
+      .where(
+        '(posts.user_id = ?) OR (post_users.user_id =?)
+          OR (f1.status = ? AND f1.user2_id = ? AND posts.visible_to IN (?))
+          OR (f2.status = ? AND f2.user1_id = ? AND posts.visible_to IN (?))',
+        current_user.id, current_user.id,
+        Friend.statuses[:accepted], current_user.id,
+        [Post.visible_tos[:public], Post.visible_tos[:friends]],
+        Friend.statuses[:accepted], current_user.id,
+        [Post.visible_tos[:public], Post.visible_tos[:friends]]
+      )
+      .distinct
   end
 end
